@@ -7,6 +7,7 @@ import json
 import os
 from tqdm import tqdm
 import argparse
+from encoder import Encoder
 
 
 def main(clip_model_type: str):
@@ -14,6 +15,9 @@ def main(clip_model_type: str):
     clip_model_name = clip_model_type.replace('/', '_')
     out_path = f"./data/coco/oscar_split_{clip_model_name}_train.pkl"
     clip_model, preprocess = clip.load(clip_model_type, device=device, jit=False)
+
+    tinyvit_model = Encoder()
+
     with open('./data/coco/annotations/train_caption.json', 'r') as f:
         data = json.load(f)
     print("%0d captions loaded from json " % len(data))
@@ -31,6 +35,8 @@ def main(clip_model_type: str):
         with torch.no_grad():
             prefix = clip_model.encode_image(image).cpu()
             # prefix.shape = torch.Size([1, 512]) dtype=torch.float16
+            # TODO: replace clip_model.encode_image(image).cpu() with tinyvit_model.foward(image).cpu()
+            # Add make sure the relevent dims in train.py are = 768 (since that's the embedding dim of tinyvit)
         d["clip_embedding"] = i
         all_embeddings.append(prefix)
         all_captions.append(d)
