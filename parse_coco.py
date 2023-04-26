@@ -27,8 +27,10 @@ def main(clip_model_type: str):
             filename = f"./data/coco/val2014/COCO_val2014_{int(img_id):012d}.jpg"
         image = io.imread(filename)
         image = preprocess(Image.fromarray(image)).unsqueeze(0).to(device)
+        # image.shape = torch.Size([1, 3, 224, 224]) with values [0, 1]
         with torch.no_grad():
             prefix = clip_model.encode_image(image).cpu()
+            # prefix.shape = torch.Size([1, 512]) dtype=torch.float16
         d["clip_embedding"] = i
         all_embeddings.append(prefix)
         all_captions.append(d)
