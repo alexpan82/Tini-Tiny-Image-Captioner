@@ -1,13 +1,17 @@
 name: clip_prefix_caption
 channels:
   - defaults
+  - conda-forage
 dependencies:
 - python>=3.8
 - pip>=21
 - scikit-image=0.18.1
+- nomkl
+- gitpython
 - pip:
    - transformers~=4.10.2
    - ftfy
    - regex
    - tqdm
+   - timm
    - git+https://github.com/openai/CLIP.git
