@@ -10,12 +10,13 @@ import argparse
 from encoder import Encoder
 
 def main(clip_model_type: str):
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     clip_model_name = clip_model_type.replace('/', '_')
     out_path = f"./data/coco/oscar_split_{clip_model_name}_train.pkl"
     clip_model, preprocess = clip.load(clip_model_type, device=device, jit=False)
 
-    tinyvit_model = Encoder()
+    print(device)
+    tinyvit_model = Encoder(device).to(device)
 
     with open('./data/coco/annotations/train_caption.json', 'r') as f:
         data = json.load(f)
@@ -33,7 +34,8 @@ def main(clip_model_type: str):
         # image.shape = torch.Size([1, 3, 224, 224]) with values [0, 1]
         with torch.no_grad():
             # prefix = clip_model.encode_image(image).cpu()
-            prefix = tinyvit_model.forward(image).cpu()
+            logits = tinyvit_model.forward(image).cpu()
+            prefix = tinyvit_model.norm_head
             print(prefix.shape)
             # prefix.shape = torch.Size([1, 512]) dtype=torch.float16
             # tinyvit_out.shape = torch.Size([1, 1000]) dtype=torch.float32
