@@ -41,7 +41,7 @@ class Encoder(nn.Module):
 
     def forward_hook(self):
         def hook(module, input, output):
-            self.norm_head = output[0]
+            self.norm_head = output
         return hook
 
 if __name__ == "__main__":
