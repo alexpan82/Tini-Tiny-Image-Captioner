@@ -293,6 +293,7 @@ def train(dataset: ClipCocoDataset, model: ClipCaptionModel, args,
           lr: float = 2e-5, warmup_steps: int = 5000, output_dir: str = ".", output_prefix: str = ""):
 
     device = torch.device('cuda:0')
+    torch.cuda.empty_cache()
     batch_size = args.bs
     epochs = args.epochs
     if not os.path.exists(output_dir):
@@ -336,7 +337,8 @@ def train(dataset: ClipCocoDataset, model: ClipCaptionModel, args,
                 model.state_dict(),
                 os.path.join(output_dir, f"{output_prefix}-{epoch:03d}.pt"),
             )
-        f_loss.write('%s\n' % epoch_loss / (idx+1))
+        print(epoch_loss, idx)
+        f_loss.write('%s\n' % epoch_loss)
     f_loss.close()
     return model
 
