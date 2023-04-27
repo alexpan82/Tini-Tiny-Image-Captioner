@@ -305,7 +305,10 @@ def train(dataset: ClipCocoDataset, model: ClipCaptionModel, args,
         optimizer, num_warmup_steps=warmup_steps, num_training_steps=epochs * len(train_dataloader)
     )
     # save_config(args)
+    f_loss = open("./train_loss.txt", "w")
+
     for epoch in range(epochs):
+        epoch_loss = 0.0
         print(f">>> Training epoch {epoch}")
         sys.stdout.flush()
         progress = tqdm(total=len(train_dataloader), desc=output_prefix)
@@ -315,6 +318,7 @@ def train(dataset: ClipCocoDataset, model: ClipCaptionModel, args,
             outputs = model(tokens, prefix, mask)
             logits = outputs.logits[:, dataset.prefix_length - 1: -1]
             loss = nnf.cross_entropy(logits.reshape(-1, logits.shape[-1]), tokens.flatten(), ignore_index=0)
+            epoch_loss += loss.item() * prefix.size(0)
             loss.backward()
             optimizer.step()
             scheduler.step()
@@ -332,6 +336,8 @@ def train(dataset: ClipCocoDataset, model: ClipCaptionModel, args,
                 model.state_dict(),
                 os.path.join(output_dir, f"{output_prefix}-{epoch:03d}.pt"),
             )
+        f_loss.write('%s\n' % epoch_loss / (idx+1))
+    f_loss.close()
     return model
 
 
