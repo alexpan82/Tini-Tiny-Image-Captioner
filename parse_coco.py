@@ -15,7 +15,7 @@ def main(clip_model_type: str):
     out_path = f"./data/coco/oscar_split_{clip_model_name}_train.pkl"
     if clip_model_type == 'tinyvit':
         tinyvit_model = Encoder(device).to(device)
-        clip_model, preprocess = clip.load(clip_model_type, device=device, jit=False)
+        _, preprocess = clip.load('ViT-B/32', device=device, jit=False)
     else:
         clip_model, preprocess = clip.load(clip_model_type, device=device, jit=False)
 
