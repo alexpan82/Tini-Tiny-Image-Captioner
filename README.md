@@ -24,7 +24,7 @@ python parse_coco.py --clip_model_type tinyvit
 
 Train transformer mapping network:
 ```
-python train.py --data ./data/coco/oscar_split_tinyvit_train.pkl --out_dir ./coco_train/ --mapping_type transformer --num_layers 8 --prefix_length 40 --prefix_length_clip 40
+python train.py --data ./data/coco/oscar_split_tinyvit_train.pkl --out_dir ./coco_train_transformer_4/ --mapping_type transformer --num_layers 8 --prefix_length 40 --prefix_length_clip 40
 ```
 See [Mokady et al](https://github.com/rmokady/CLIP_prefix_caption) for how to use other `train.py` arguments
 
