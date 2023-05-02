@@ -14,11 +14,12 @@ Image captioning is an area of deep learning that is currently receiving massive
 conda env create -f environment.yml
 ```
 ### Data download
-- Download [train_captions](https://drive.google.com/file/d/1D3EzUK1d1lNhD2hAvRiKPThidiVbP2K_/view?usp=sharing) to `data/coco/annotations`.
+- Download modified [train_captions](https://drive.google.com/file/d/1D3EzUK1d1lNhD2hAvRiKPThidiVbP2K_/view?usp=sharing) to `data/coco/annotations`
+- Download original captions as well in this way:
 ```
 wget http://images.cocodataset.org/annotations/annotations_trainval2014.zip
 unzip annotations_trainval2014.zip
-ln -s annotations/captions_train2014.json annotations/train_caption.json
+mv annotations annotations_org
 ```
 - Download [training images](http://images.cocodataset.org/zips/train2014.zip) and [validation images](http://images.cocodataset.org/zips/val2014.zip) and unzip.
 
