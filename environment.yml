@@ -246,6 +246,7 @@ dependencies:
     - psutil 
     - ptyprocess 
     - pure-eval 
+    - pycocoevalcap
     - pycocotools 
     - pycparser 
     - pygments 
