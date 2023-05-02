@@ -217,6 +217,7 @@ dependencies:
     - nbformat 
     - nest-asyncio 
     - networkx 
+    - nltk
     - notebook 
     - notebook-shim 
     - numpy 
