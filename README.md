@@ -3,7 +3,7 @@
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg"></a>   
 
  * Inspired by ["ClipCap: CLIP Prefix for Image Captioning"](https://arxiv.org/abs/2111.09734) and a fork of [Mokady et al](https://github.com/rmokady/CLIP_prefix_caption).
- * See our [paper]() for detailed description of our project
+ * See our [paper](https://drive.google.com/file/d/1lgrMsr5CwDAwFXvoyn0G_5LTzSka_-it/view?usp=sharing) for detailed description of our project
 
 ## Description
 Image captioning is an area of deep learning that is currently receiving massive interest. However, these systems and image captioning models in general tend to be very computationally expensive due to their massive frameworks with very deep neural networks and heavy decoders, encoders, and transformers. Trying to experiment with and extend these models is impossible for the average person with consumer-grade hardware. We tackled this problem by creating a smaller and lightweight image captioning system that can be trained and implemented end-to-end on a single GPU.
